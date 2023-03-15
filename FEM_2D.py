@@ -3,7 +3,8 @@
 """
 Created on Wed Mar  8 17:04:45 2023
 @author: abdiel
-Compute stiffness facto fb from the hypoplastic model of von Wolfersdoff model for sand
+
+### Code to produce FEM analyses in 2D for very simple geometries###
 """
 import numpy
 import sympy as sym
