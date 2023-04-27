@@ -9,9 +9,9 @@ Element stiffness matrix was compared to other solution and is ok!
 """
 import numpy
 import sympy as sym
-from sympy import MatrixSymbol, Matrix
-import matplotlib.pyplot as plt
-from array import *
+#from sympy import MatrixSymbol, Matrix
+#import matplotlib.pyplot as plt
+#from array import *
 
 class FEM_2D_element:
     
@@ -186,7 +186,7 @@ class FEM_2D_element:
   
     
 def main():
- number_elements = 200
+ number_elements = 1000
  Length = 0.5/number_elements
  E_modulus = 69e9
  I = 1.8e-6

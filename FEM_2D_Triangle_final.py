@@ -8,8 +8,8 @@ Created on Wed Mar  8 17:04:45 2023
 """
 import numpy
 import sympy as sym
-from sympy import MatrixSymbol, Matrix
-import matplotlib.pyplot as plt
+#from sympy import MatrixSymbol, Matrix
+#import matplotlib.pyplot as plt
 
 class FEM_2D_element_triangle:
 
@@ -79,16 +79,14 @@ class FEM_2D_element_triangle:
         even = 0
         odd = 0
         for e in range(self.n_elem):
-            if (e==0 or e==2 or e==4 or e==6 or e==8 or e==10 or e==12 or e==14\
-                or e==16 or e==18):
+            if (e%2==0):
                 even = even + 1
                 x1 = self.Le*even; x2 = self.Le*even; x3 = self.Le*even-self.Le;
                 y1 = 0;            y2 = self.H;       y3 = 0;
                 ke = self.Compute_ke(x1,y1,x2,y2,x3,y3)
-                print(e,ke)
+               # print(e,ke)
 
-            if (e==1 or e==3 or e==5 or e==7 or e==9 or e==11 or e==13 or e==15\
-                or e==17 or e==19):
+            else:
                 odd = odd + 1
                 x3 = self.Le*odd; x1 = self.Le*odd-self.Le; x2 = self.Le*odd-self.Le;
                 y3 = self.H;            y1 = self.H;       y2 = 0;
@@ -164,7 +162,8 @@ class FEM_2D_element_triangle:
         self.Define_Global_Load_Vector()
         Qred= self.Compute_Qred()
         u = self.Solve_System(Kred,Qred)
-        print(u)
+        print("u_tip-point-load", ["3.35e-4 m"])        
+        print("u =", u)
 
         return u
 
@@ -182,12 +181,8 @@ class FEM_2D_element_triangle:
         #plt.legend(loc="lower right")
 
 def main():
- number_elements = 20
- Length = 0.5
- Height = 0.06
- q_load = -1000
- E_modulus = 69e9
- v_poisson = 0.33
+ number_elements, Length, Height, q_load = 20,0.5,0.06,-1000
+ E_modulus,v_poisson = 69e9, 0.33
  args = (Length,Height,q_load,E_modulus,v_poisson)
 
  Beam = FEM_2D_element_triangle(number_elements,*args)
