@@ -4,7 +4,9 @@
 Created on Wed Mar  8 17:04:45 2023
 @author: abdiel
 
-### Code to solve CST  benchmark: see CST_benchmark.pdf
+### Code to produce FEM analyses in 2D for very simple geometries###
+Benchmark adopted from lecture notes of Prof. Suvrano
+https://homepages.rpi.edu/~des/IFEA2007Fall.html
 
 """
 import numpy
@@ -12,7 +14,7 @@ import sympy as sym
 from sympy import MatrixSymbol, Matrix
 import matplotlib.pyplot as plt
 
-class FEM_2D_element_triangle:
+class FEM_2D_element_quad:
     
     def __init__(self,n_elem,*args):
         self.L = args[0]
@@ -86,7 +88,7 @@ class FEM_2D_element_triangle:
         # acting on the edge of element 2
        self.N = sym.zeros(2, 6)
        fpoint = numpy.zeros((6,1))
-       fpoint[5] = -1000
+       fpoint[5] = -1000 #point load of 1000 pounds
 
        self.psi = sym.Symbol('psi')
        self.eta = sym.Symbol('eta')
@@ -207,6 +209,8 @@ class FEM_2D_element_triangle:
         # Calculate displacements
         u = self.Solve_System(Kred,Qred) 
         print("u = ", u)
+        print("u_ref = ",[0.2337e-4,0.1069e-4,-0.9084e-4])
+        
        
         #print(C)       
                 
@@ -227,12 +231,12 @@ def main():
  number_elements = 2
  Length = 3
  Height = 2
- q_load = -300
+ q_load = -300 #distribuited load of 300 psi
  E_modulus = 30e6
  v_poisson = 0.25
  args = (Length,Height,q_load,E_modulus,v_poisson)   
  
- Beam = FEM_2D_element_triangle(number_elements,*args) 
+ Beam = FEM_2D_element_quad(number_elements,*args) 
  Beam.Solve() 
 
  #pf, fbf = pressure.Compute_fb()   

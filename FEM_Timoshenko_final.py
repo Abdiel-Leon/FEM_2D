@@ -20,7 +20,7 @@ class FEM_2D_element:
        self.E_value = args[1]
        self.I_value = args[2]
        self.G_value = args[3] 
-       self.A_value = args[4]*5/6
+       self.A_value = args[4]*5/6 # 5/6 is the shear reducxtion factor in timoshenko beams
        self.n_elem = n_elem
        self.dof = n_elem*2 + 2
         
