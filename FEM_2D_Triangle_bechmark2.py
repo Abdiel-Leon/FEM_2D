@@ -12,6 +12,7 @@ Created on Wed Mar  8 17:04:45 2023
 @author: abdiel
 
 ### Code to produce FEM analyses in 2D for very simple geometries###
+Benchmark adopted from Finite Element Method SME 3033 notes by Dr. Nazri Kamsah 
 """
 import numpy
 #from operator import itemgetter
